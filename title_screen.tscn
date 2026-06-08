@@ -20,10 +20,10 @@ stream = ExtResource("2_ak2if")
 autoplay = true
 
 [node name="TitleScreen" type="Node2D" parent="." unique_id=946397073]
-position = Vector2(-25, -20)
+position = Vector2(-50, -40)
 script = ExtResource("1_ig5kc")
 
-[node name="Background" type="TextureRect" parent="TitleScreen" unique_id=251917335]
+[node name="TextureRect" type="TextureRect" parent="TitleScreen" unique_id=251917335]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
