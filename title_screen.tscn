@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://bpje7i2oelvey"]
+
+[ext_resource type="Script" uid="uid://dxye61exmp5bd" path="res://title_screen.gd" id="1_ig5kc"]
+[ext_resource type="AudioStream" uid="uid://bu4xh6emg5tp4" path="res://Menu/SFX/1534004_-Populous-District-.mp3" id="2_ak2if"]
+[ext_resource type="Texture2D" uid="uid://bstkwx1sojk34" path="res://Menu/Images/Gemini_Generated_Image_udlhzqudlhzqudlh.png" id="3_jqemp"]
+[ext_resource type="Texture2D" uid="uid://bbqsmgjkcm6qd" path="res://Menu/Images/sprite-6-1.png" id="4_tpml5"]
+[ext_resource type="Script" uid="uid://b27obsqenu45l" path="res://title_screen_test.gd" id="5_tpml5"]
+[ext_resource type="Texture2D" uid="uid://bp1m6roggkal3" path="res://Menu/Images/sprite-6-2.png" id="6_jqemp"]
+[ext_resource type="AudioStream" uid="uid://bp6v8ctv4uedu" path="res://Menu/SFX/button_click.mp3" id="6_tpml5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jqemp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_013yr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8vmu4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tpml5"]
+
+[node name="Canvas Layer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(517, 386)
+
+[node name="Bg Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ak2if")
+autoplay = true
+
+[node name="TitleScreen" type="Node2D" parent="."]
+script = ExtResource("1_ig5kc")
+
+[node name="Background" type="TextureRect" parent="TitleScreen"]
+offset_left = -259.0
+offset_top = -44.0
+offset_right = 879.0
+offset_bottom = 838.0
+texture = ExtResource("3_jqemp")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="PlayButton" type="Button" parent="TitleScreen"]
+offset_left = 173.0
+offset_top = 566.0
+offset_right = 286.0
+offset_bottom = 622.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jqemp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_013yr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8vmu4")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tpml5")
+text = " "
+script = ExtResource("5_tpml5")
+normal_icon = ExtResource("4_tpml5")
+clicked_icon = ExtResource("6_jqemp")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TitleScreen/PlayButton"]
+stream = ExtResource("6_tpml5")
+
+[node name="IconRect" type="TextureRect" parent="TitleScreen/PlayButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.411
+anchor_top = -9.922
+anchor_right = 7.497
+anchor_bottom = 3.548
+offset_left = 82.443
+offset_top = 625.632
+offset_right = -621.161
+offset_bottom = -18.688
+grow_vertical = 0
+texture = ExtResource("4_tpml5")
+expand_mode = 2
+stretch_mode = 4
