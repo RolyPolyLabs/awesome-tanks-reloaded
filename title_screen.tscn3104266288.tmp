@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://bpje7i2oelvey"]
+
+[ext_resource type="Script" uid="uid://dxye61exmp5bd" path="res://Scripts/title_screen.gd" id="1_ig5kc"]
+[ext_resource type="AudioStream" uid="uid://bu4xh6emg5tp4" path="res://Menu/SFX/1534004_-Populous-District-.mp3" id="2_ak2if"]
+[ext_resource type="AudioStream" uid="uid://cm843yk64c2k8" path="res://Menu/SFX/449306_Catface.mp3" id="3_013yr"]
+[ext_resource type="Texture2D" uid="uid://sssh3dgtib2u" path="res://Menu/Images/Bg No Text.png" id="3_ig5kc"]
+[ext_resource type="AudioStream" uid="uid://bugif54j1oeu7" path="res://Menu/SFX/music_menu.mp3" id="3_jqemp"]
+[ext_resource type="Script" uid="uid://df7717bi4cr5d" path="res://Scripts/music_by_water_flame.gd" id="4_05l2w"]
+[ext_resource type="Texture2D" uid="uid://btd8rwma3n61" path="res://Menu/Music By Waterflame.png" id="4_hafda"]
+[ext_resource type="Texture2D" uid="uid://6xnjbtc0f1tx" path="res://Menu/Images/Awesome Tanks Text Nobg.png" id="8_8vmu4"]
+[ext_resource type="Script" uid="uid://dlxu5dh2we0sb" path="res://logo.gd" id="9_xfn3p"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_8vmu4"]
+shuffle = true
+stream_count = 3
+stream_0 = ExtResource("2_ak2if")
+stream_1 = ExtResource("3_013yr")
+stream_2 = ExtResource("3_jqemp")
+
+[node name="Canvas Layer" type="Control" unique_id=743864101]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=479750189]
+position = Vector2(517, 386)
+
+[node name="Bg Music" type="AudioStreamPlayer2D" parent="." unique_id=2090627465]
+stream = SubResource("AudioStreamPlaylist_8vmu4")
+autoplay = true
+
+[node name="TitleScreen" type="Node2D" parent="." unique_id=946397073]
+position = Vector2(-50, -40)
+script = ExtResource("1_ig5kc")
+
+[node name="TextureRect" type="TextureRect" parent="TitleScreen" unique_id=251917335]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1138.0
+offset_bottom = 882.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ig5kc")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Buttons" type="Node2D" parent="." unique_id=1047236327]
+position = Vector2(-28, 5)
+
+[node name="Buttons" type="VBoxContainer" parent="Buttons" unique_id=1111094572]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Music By WaterFlame" type="Button" parent="." unique_id=1492008655]
+layout_mode = 0
+offset_left = 955.0
+offset_top = 638.0
+offset_right = 1022.0
+offset_bottom = 766.0
+icon = ExtResource("4_hafda")
+script = ExtResource("4_05l2w")
+
+[node name="Logo" type="TextureRect" parent="." unique_id=393830943]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -530.0
+offset_top = -305.0
+offset_right = 530.0
+offset_bottom = 305.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("8_8vmu4")
+script = ExtResource("9_xfn3p")
+
+[connection signal="pressed" from="Music By WaterFlame" to="Music By WaterFlame" method="_on_pressed"]

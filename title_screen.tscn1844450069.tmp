@@ -35,22 +35,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_skmiq")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=479750189]
-position = Vector2(21, 19)
-
-[node name="CenterContainer" type="CenterContainer" parent="Camera2D" unique_id=186332773]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="SoundPrompt" type="Control" parent="." unique_id=1482564383]
 visible = false
 layout_mode = 1
@@ -62,9 +46,15 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="SoundPrompt" unique_id=1047091629]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.5
+offset_top = -11.5
+offset_right = 56.5
+offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -98,9 +88,15 @@ text = "No"
 
 [node name="MusicPrompt" type="Control" parent="." unique_id=1031086197]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -139,16 +135,16 @@ theme_override_font_sizes/font_size = 40
 text = "No"
 
 [node name="GameCanvas" type="Control" parent="." unique_id=1807635499]
+visible = false
 anchors_preset = 0
-offset_left = -496.0
-offset_top = -367.0
-offset_right = -456.0
-offset_bottom = -327.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Canvas Layer" type="CanvasLayer" parent="GameCanvas" unique_id=704753856]
 metadata/_edit_group_ = true
 
-[node name="Canvas Layer" type="Control" parent="GameCanvas" unique_id=320575964]
-layout_mode = 1
-anchors_preset = 0
+[node name="Camera2D" type="Camera2D" parent="GameCanvas/Canvas Layer" unique_id=479750189]
+position = Vector2(517, 386)
 
 [node name="Bg Music" type="AudioStreamPlayer" parent="GameCanvas/Canvas Layer" unique_id=601783504]
 stream = SubResource("AudioStreamPlaylist_8vmu4")
@@ -181,7 +177,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Music By WaterFlame" type="Button" parent="GameCanvas/Canvas Layer" unique_id=1492008655]
-layout_mode = 0
 offset_left = 955.0
 offset_top = 638.0
 offset_right = 1022.0
@@ -190,7 +185,6 @@ icon = ExtResource("4_hafda")
 script = ExtResource("4_05l2w")
 
 [node name="Logo" type="TextureRect" parent="GameCanvas/Canvas Layer" unique_id=393830943]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -208,7 +202,6 @@ texture = ExtResource("8_8vmu4")
 script = ExtResource("9_xfn3p")
 
 [node name="Logo2" type="TextureRect" parent="GameCanvas/Canvas Layer" unique_id=1210488465]
-layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0

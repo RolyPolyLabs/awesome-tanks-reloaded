@@ -1,43 +1,81 @@
-extends Node2D
+extends Node
 
-@onready var background: TextureRect = $TextureRect # Make sure this matches your node name
+# --- ONREADY REFERENCES ---
+# Ensure these paths exactly match your Scene Tree structure
+@onready var sound_prompt: Control = $SoundPrompt
+@onready var music_prompt: Control = $MusicPrompt
+@onready var game_canvas: Control = $GameCanvas
+@onready var bg_music: AudioStreamPlayer = $"GameCanvas/Canvas Layer/Bg Music"
 
-# How much the background can move at maximum (in pixels)
-@export var max_move_amount: float = 30.0
-
-# How smooth the movement is (lower = smoother/slower lerp)
-@export var lerp_speed: float = 5.0
-
-# Store the default starting position of the background
-var base_position: Vector2
 
 func _ready() -> void:
-	if background:
-		base_position = background.position
-	else:
-		push_error("TextureRect child not found! Check your node name.")
+	# 1. Force correct initial visibility states on game startup
+	sound_prompt.show()
+	music_prompt.hide()
+	game_canvas.hide()
+	
+	# 2. Safety check: make sure the background track isn't already playing
+	bg_music.stop()
 
-func _process(delta: float) -> void:
-	if not background:
-		return
-		
-	# 1. Get the total screen/viewport size
-	var viewport_size = get_viewport_rect().size
-	var center = viewport_size / 2.0
+
+# =============================================================================
+# --- STEP 1: SOUND EFFECTS (SFX) PROMPT ---
+# =============================================================================
+
+func _on_sound_on_button_pressed() -> void:
+	# Locate the central SFX bus and unmute it
+	var sfx_index = AudioServer.get_bus_index("SFX")
+	AudioServer.set_bus_mute(sfx_index, false)
+	_transition_to_music_prompt()
+
+
+func _on_sound_off_button_pressed() -> void:
+	# Locate the central SFX bus and mute it entirely
+	var sfx_index = AudioServer.get_bus_index("SFX")
+	AudioServer.set_bus_mute(sfx_index, true)
+	_transition_to_music_prompt()
+
+
+func _transition_to_music_prompt() -> void:
+	# Hide the first choice screen immediately
+	sound_prompt.hide()
 	
-	# 2. Get current mouse position
-	var mouse_pos = get_viewport().get_mouse_position()
+	# Create a seamless 1-second delay before moving to the next choice
+	await get_tree().create_timer(1.0).timeout
 	
-	# 3. Calculate how far the mouse is from the center (-1.0 to 1.0 range)
-	var mouse_offset_percentage = Vector2(
-		(mouse_pos.x - center.x) / center.x,
-		(mouse_pos.y - center.y) / center.y
-	)
+	# Reveal the second choices screen
+	music_prompt.show()
+
+
+# =============================================================================
+# --- STEP 2: MUSIC PROMPT ---
+# =============================================================================
+
+func _on_music_on_button_pressed() -> void:
+	# Locate the central Music bus and unmute it
+	var music_index = AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_mute(music_index, false)
+	_start_main_game()
+
+
+func _on_music_off_button_pressed() -> void:
+	# Locate the central Music bus and mute it
+	var music_index = AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_mute(music_index, true)
+	_start_main_game()
+
+
+# =============================================================================
+# --- STEP 3: START THE MAIN GAME ---
+# =============================================================================
+
+func _start_main_game() -> void:
+	# Hide the final layout configuration prompt
+	music_prompt.hide()
 	
-	# 4. Calculate the target position based on that offset
-	# We multiply by -1 so the background moves *away* from the mouse, creating depth
-	var target_offset = mouse_offset_percentage * max_move_amount * -1.0
-	var target_position = base_position + target_offset
+	# Reveal the main game level and its components
+	game_canvas.show()
 	
-	# 5. Smoothly slide the background to the target position
-	background.position = background.position.lerp(target_position, lerp_speed * delta)
+	# Safely run the background track. 
+	# If the "Music" bus is muted, Godot processes the stream silently.
+	bg_music.play()
