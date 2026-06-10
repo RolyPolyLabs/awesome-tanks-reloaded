@@ -1,5 +1,5 @@
 extends Node
-
+var Game_Started = "No"
 # --- ONREADY REFERENCES ---
 # Ensure these paths exactly match your Scene Tree structure
 @onready var sound_prompt: Control = $SoundPrompt
@@ -79,3 +79,4 @@ func _start_main_game() -> void:
 	# Safely run the background track. 
 	# If the "Music" bus is muted, Godot processes the stream silently.
 	bg_music.play()
+	var Game_Started = "Yes"
